@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система управления объектом</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+
+        <div id="user-screen" class="screen">
+            <header>
+                <h1>Мониторинг систем кабинет №216</h1>
+                <button id="logout-btn" class="btn">Выйти</button>
+            </header>
+            
+            <div class="status-cards">
+                <div class="card" id="plumbing">
+                    <h2>Сантехническая система</h2>
+                    <div class="status-indicator ok"></div>
+                    <p class="status-text">Работает нормально</p>
+                </div>
+                <div class="card" id="electric">
+                    <h2>Электрика</h2>
+                    <div class="status-indicator ok"></div>
+                    <p class="status-text">Работает нормально</p>
+                </div>
+                <div class="card" id="equipment">
+                    <h2>Оборудование</h2>
+                    <div class="status-indicator warning"></div>
+                    <p class="status-text">Требуется проверка</p>
+                </div>
+            </div>
+
+            <div class="request-form">
+                <h2>Оставить заявку</h2>
+                <form id="request-form">
+                    <div class="form-group">
+                        <label for="request-type">Тип заявки:</label>
+                        <select id="request-type" required>
+                            <option value="plumbing">Сантехника</option>
+                            <option value="electric">Электрика</option>
+                            <option value="equipment">Оборудование</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="request-description">Описание проблемы:</label>
+                        <textarea id="request-description" required rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="request-photo">Фотография (если нужно):</label>
+                        <input type="file" id="request-photo" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="admin-screen" class="screen hidden">
+            <header>
+                <h1>Панель администратора</h1>
+                <button id="admin-logout-btn" class="btn">Выйти</button>
+            </header>
+            
+            <nav class="admin-nav">
+                <button class="admin-tab active" data-tab="status">Статус систем</button>
+                <button class="admin-tab" data-tab="requests">Заявки</button>
+                <button class="admin-tab" data-tab="users">Пользователи</button>
+            </nav>
+
+            <div class="admin-content">
+                <div id="status-tab" class="admin-tab-content active">
+                    <h2>Управление статусом систем</h2>
+                    <div class="status-controls">
+                        <div class="status-control">
+                            <h3>Сантехническая система</h3>
+                            <select class="status-select" data-system="plumbing">
+                                <option value="ok">Работает нормально</option>
+                                <option value="warning">Требуется проверка</option>
+                                <option value="error">Авария</option>
+                            </select>
+                        </div>
+                        <div class="status-control">
+                            <h3>Электрика</h3>
+                            <select class="status-select" data-system="electric">
+                                <option value="ok">Работает нормально</option>
+                                <option value="warning">Требуется проверка</option>
+                                <option value="error">Авария</option>
+                            </select>
+                        </div>
+                        <div class="status-control">
+                            <h3>Оборудование</h3>
+                            <select class="status-select" data-system="equipment">
+                                <option value="ok">Работает нормально</option>
+                                <option value="warning">Требуется проверка</option>
+                                <option value="error">Авария</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="update-status-btn" class="btn">Обновить статусы</button>
+                </div>
+
+                <div id="requests-tab" class="admin-tab-content">
+                    <h2>Заявки пользователей</h2>
+                    <div class="requests-list" id="requests-list">
+                        <!-- Requests will appear here -->
+                    </div>
+                </div>
+
+                <div id="users-tab" class="admin-tab-content">
+                    <h2>Управление пользователями</h2>
+                    <div class="add-user-form">
+                        <h3>Добавить нового пользователя</h3>
+                        <form id="add-user-form">
+                            <div class="form-group">
+                                <label for="new-username">Логин:</label>
+                                <input type="text" id="new-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Пароль:</label>
+                                <input type="password" id="new-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="new-user-admin"> Администратор
+                                </label>
+                            </div>
+                            <button type="submit" class="btn">Добавить пользователя</button>
+                        </form>
+                    </div>
+                    <div class="users-list" id="users-list">
+                        <!-- Users will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
